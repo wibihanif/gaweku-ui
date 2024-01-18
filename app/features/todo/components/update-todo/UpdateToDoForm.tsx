@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { CreateToDoFormSchema } from "../../schemas/CreateToDoFormSchema";
 import { useGetToDoList } from "../../api/useGetToDoListQuery";
 import { UpdateToDoFormInner } from "./UpdateToDoFormInner";
+import { useUpdateToDoMutation } from "../../api/useUpdateToDoMutation";
 
 interface UpdateToDoFormProps {
   setOpenModal: (value: boolean) => void;
@@ -21,12 +22,19 @@ export const UpdateToDoForm: React.FC<UpdateToDoFormProps> = ({
   setOpenModal,
   toDoData,
 }) => {
+  const { mutateAsync: updateToDo } = useUpdateToDoMutation();
   const { refetch: refetchToDoList } = useGetToDoList();
 
   const onSubmit = async (values: UpdateToDoFormInput) => {
     const isCompleteBooleanValue = JSON.parse(values.isCompleted);
 
     try {
+      await updateToDo({
+        id: toDoData.id,
+        is_completed: isCompleteBooleanValue,
+        name: values.name,
+      });
+
       setOpenModal(false);
 
       await refetchToDoList();

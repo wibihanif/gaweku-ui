@@ -42,6 +42,7 @@ export const UpdateToDoFormInner: React.FC<UpdateToDoFormInnerProps> = ({
           <input
             id="isCompleted"
             type="checkbox"
+            checked={values.isCompleted === "true"}
             className="w-5 h-5 text-red-600  border-red-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-red-800 focus:ring-2 dark:bg-red-700 dark:border-red-600"
             {...getFieldProps("isCompleted")}
             value={isCompletedValue === "false" ? "true" : "false"}

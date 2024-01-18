@@ -24,6 +24,7 @@ export const DeleteToDoModal: React.FC<DeleteToDoModalProps> = ({
       await deleteToDo({
         toDoId: toDoData.id,
       });
+
       setOpenModal(false);
 
       await refetchToDoList();

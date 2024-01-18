@@ -27,6 +27,7 @@ export const CreateToDoForm: React.FC<CreateToDoFormProps> = ({
         is_completed: isCompleteBooleanValue,
         name: values.name,
       });
+
       setOpenModal(false);
 
       await refetchToDoList();
