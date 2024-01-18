@@ -1,3 +1,4 @@
+import useAxiosInstance from "@/app/lib/axios";
 import { useStore } from "@/app/stores";
 import axios from "axios";
 import { UseMutationOptions, useMutation } from "react-query";
@@ -12,14 +13,13 @@ export const useLoginMutation = (
 ) => {
   const { onAuthSuccess } = useStore();
 
+  const { post } = useAxiosInstance();
+
   return useMutation(async ({ email, password }: LoginArgs) => {
-    const response = await axios.post(
-      "https://jfe-test.devto.top/auth/sign-in",
-      {
-        email,
-        password,
-      }
-    );
+    const response = await post("/auth/sign-in", {
+      email,
+      password,
+    });
 
     const token = response.data.token;
 

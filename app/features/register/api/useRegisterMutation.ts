@@ -1,4 +1,4 @@
-import axios from "axios";
+import useAxiosInstance from "@/app/lib/axios";
 import { UseMutationOptions, useMutation } from "react-query";
 
 interface RegisterArgs {
@@ -10,9 +10,11 @@ interface RegisterArgs {
 export const useRegisterMutation = (
   options?: UseMutationOptions<void, unknown, RegisterArgs>
 ) => {
+  const { post } = useAxiosInstance();
+
   return useMutation(
     async ({ email, password, confirm_password }: RegisterArgs) => {
-      await axios.post("https://jfe-test.devto.top/auth/sign-up", {
+      await post("/auth/sign-up", {
         email,
         password,
         confirm_password,

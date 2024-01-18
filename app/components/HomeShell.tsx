@@ -170,7 +170,7 @@ const HomeShell: React.FC<PropsWithChildren> = ({ children }) => {
                           />
                         </div>
                         <span className="ml-3 text-xs font-semibold text-[#B43030]">
-                          Dashboard
+                          To-do-list
                         </span>
                       </a>
                     </li>

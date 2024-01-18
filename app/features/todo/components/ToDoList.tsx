@@ -1,4 +1,32 @@
-export const ToDoList: React.FC = () => {
+import { ToDoData } from "../types";
+
+interface ToDoListProps {
+  name: string;
+  id: string;
+  is_completed: boolean;
+  setOpenUpdateModal: (value: boolean) => void;
+  setOpenDeleteModal: (value: boolean) => void;
+  setToDoData: (value: ToDoData) => void;
+}
+
+export const ToDoList: React.FC<ToDoListProps> = ({
+  name,
+  id,
+  setOpenDeleteModal,
+  setOpenUpdateModal,
+  setToDoData,
+  is_completed,
+}) => {
+  const openUpdateModal = (value: ToDoData) => {
+    setToDoData(value);
+    setOpenUpdateModal(true);
+  };
+
+  const openDeleteModal = (value: ToDoData) => {
+    setToDoData(value);
+    setOpenDeleteModal(true);
+  };
+
   return (
     <div className="flex">
       <div className="mb-4 p-3 border rounded-md flex justify-between w-full">
@@ -10,10 +38,19 @@ export const ToDoList: React.FC = () => {
             disabled
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
-          <span className="ms-2 text-xs font-normal">Default checkbox</span>
+          <span className="ms-2 text-xs font-normal">{name}</span>
         </div>
         <div className="flex items-center gap-2">
-          <button className="border border-slate-300 p-0.5 rounded-md">
+          <button
+            className="border border-slate-300 p-0.5 rounded-md"
+            onClick={() =>
+              openUpdateModal({
+                id,
+                is_completed,
+                name,
+              })
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -29,7 +66,16 @@ export const ToDoList: React.FC = () => {
               />
             </svg>
           </button>
-          <button className="border border-slate-300 p-0.5 rounded-md">
+          <button
+            className="border border-slate-300 p-0.5 rounded-md"
+            onClick={() =>
+              openDeleteModal({
+                id,
+                is_completed,
+                name,
+              })
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
