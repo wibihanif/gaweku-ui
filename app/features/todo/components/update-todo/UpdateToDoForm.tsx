@@ -1,34 +1,37 @@
-import { Button, Modal } from "flowbite-react";
-import { ToDoData } from "../../types";
-import { useDeleteToDoMutation } from "../../api/useDeleteToDoMutation";
-import { toast } from "react-toastify";
-import { AxiosError } from "axios";
-import { useGetToDoList } from "../../api/useGetToDoListQuery";
+"use client";
 
-interface DeleteToDoModalProps {
-  openModal: boolean;
+import { Formik } from "formik";
+import {
+  CreateToDoFormInput,
+  ToDoData,
+  UpdateToDoFormInput,
+} from "../../types";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { CreateToDoFormSchema } from "../../schemas/CreateToDoFormSchema";
+import { useGetToDoList } from "../../api/useGetToDoListQuery";
+import { UpdateToDoFormInner } from "./UpdateToDoFormInner";
+
+interface UpdateToDoFormProps {
   setOpenModal: (value: boolean) => void;
   toDoData: ToDoData;
 }
 
-export const DeleteToDoModal: React.FC<DeleteToDoModalProps> = ({
-  openModal,
+export const UpdateToDoForm: React.FC<UpdateToDoFormProps> = ({
   setOpenModal,
   toDoData,
 }) => {
-  const { mutateAsync: deleteToDo } = useDeleteToDoMutation();
   const { refetch: refetchToDoList } = useGetToDoList();
 
-  const onDeleteToDo = async () => {
+  const onSubmit = async (values: UpdateToDoFormInput) => {
+    const isCompleteBooleanValue = JSON.parse(values.isCompleted);
+
     try {
-      await deleteToDo({
-        toDoId: toDoData.id,
-      });
       setOpenModal(false);
 
       await refetchToDoList();
 
-      toast.success("Task successfully deleted", {
+      toast.success("Task successfully updated", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -67,26 +70,20 @@ export const DeleteToDoModal: React.FC<DeleteToDoModalProps> = ({
       }
     }
   };
-
   return (
-    <Modal show={openModal} onClose={() => setOpenModal(false)}>
-      <Modal.Header className="text-red-300">Delete Task</Modal.Header>
-      <Modal.Body>
-        <div>
-          <p className="text-base leading-relaxed text-black dark:text-gray-400">
-            Are you sure to delete this task?
-          </p>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <button
-          type="submit"
-          onClick={() => onDeleteToDo()}
-          className="w-full bg-[#B43030] focus:bg-[#B43030] text-white p-2 rounded-md"
-        >
-          Delete Task
-        </button>
-      </Modal.Footer>
-    </Modal>
+    <div>
+      <Formik<CreateToDoFormInput>
+        initialValues={{
+          isCompleted: String(toDoData.is_completed),
+          name: toDoData.name,
+        }}
+        onSubmit={onSubmit}
+        validateOnChange={true}
+        validationSchema={CreateToDoFormSchema}
+        enableReinitialize
+      >
+        <UpdateToDoFormInner toDoData={toDoData} />
+      </Formik>
+    </div>
   );
 };

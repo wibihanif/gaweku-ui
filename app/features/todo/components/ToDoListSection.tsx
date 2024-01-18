@@ -14,7 +14,11 @@ export const ToDoListSection: React.FC = () => {
   const [openDeleteToDoModal, setOpenDeleteToDoModal] = useState(false);
   const [openUpdateToDoModal, setOpenUpdateToDoModal] = useState(false);
 
-  const [toDoData, setToDoData] = useState<{} | ToDoData>({});
+  const [toDoData, setToDoData] = useState<ToDoData>({
+    id: "",
+    is_completed: false,
+    name: "",
+  });
 
   const { data: toDoList, isLoading: isLoadingToDoList } = useGetToDoList();
 
