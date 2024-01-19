@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 import { RegisterFormInner } from "./RegisterFormInner";
 import { useRegisterMutation } from "../api/useRegisterMutation";
 import { AxiosError } from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import { RegisterFormInput } from "../types";
 import { Formik } from "formik";
 import { RegisterFormSchema } from "../schemas/RegisterFormSchema";
+import toast from "react-hot-toast";
 
 export const RegisterForm: React.FC = () => {
   const { mutateAsync: register } = useRegisterMutation();
@@ -32,26 +32,40 @@ export const RegisterForm: React.FC = () => {
       const errors = err.response?.data?.errors;
 
       if (errors && errors.length !== 0) {
-        toast.error(errors.join(" "), {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast(errors.join(" "), {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            color: "red",
+          },
+          className: "",
+          icon: "👏",
+          iconTheme: {
+            primary: "#000",
+            secondary: "#fff",
+          },
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
         });
       } else {
-        toast.error(err.message, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast(err.message, {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            color: "red",
+          },
+          className: "",
+          icon: "👏",
+          iconTheme: {
+            primary: "#000",
+            secondary: "#fff",
+          },
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
         });
       }
     }
@@ -74,17 +88,6 @@ export const RegisterForm: React.FC = () => {
       >
         <RegisterFormInner toLoginPage={toLoginPage} />
       </Formik>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 };

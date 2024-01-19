@@ -7,7 +7,7 @@ import {
   UpdateToDoFormInput,
 } from "../../types";
 import { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { CreateToDoFormSchema } from "../../schemas/CreateToDoFormSchema";
 import { useGetToDoList } from "../../api/useGetToDoListQuery";
 import { UpdateToDoFormInner } from "./UpdateToDoFormInner";
@@ -39,41 +39,62 @@ export const UpdateToDoForm: React.FC<UpdateToDoFormProps> = ({
 
       await refetchToDoList();
 
-      return toast.success("Task successfully updated", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+      return toast("Task Successfully Updated", {
+        duration: 4000,
+        position: "top-center",
+        style: {
+          color: "green",
+        },
+        className: "",
+        icon: "👏",
+        iconTheme: {
+          primary: "#000",
+          secondary: "#fff",
+        },
+        ariaProps: {
+          role: "status",
+          "aria-live": "polite",
+        },
       });
     } catch (e) {
       const err = e as AxiosError<{ errors: string[] }>;
       const errors = err.response?.data?.errors;
 
       if (errors && errors.length !== 0) {
-        toast.error(errors.join(" "), {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast(errors.join(" "), {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            color: "red",
+          },
+          className: "",
+          icon: "👏",
+          iconTheme: {
+            primary: "#000",
+            secondary: "#fff",
+          },
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
         });
       } else {
-        toast.error(err.message, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast(err.message, {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            color: "red",
+          },
+          className: "",
+          icon: "👏",
+          iconTheme: {
+            primary: "#000",
+            secondary: "#fff",
+          },
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
         });
       }
     }

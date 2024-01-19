@@ -1,11 +1,10 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ProvidersReactQuery } from "./providersReactQuery";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Hydration } from "./components/Hydration/Hydration";
 import { Metadata } from "next";
-import Head from "next/head";
+import toast, { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +36,7 @@ export default function RootLayout({
       <body className={`${inter.className} `}>
         <ProvidersReactQuery>
           <Hydration>{children}</Hydration>
-          <ToastContainer />
+          <Toaster />
         </ProvidersReactQuery>
       </body>
     </html>

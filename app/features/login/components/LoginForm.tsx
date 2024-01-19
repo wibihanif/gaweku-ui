@@ -2,12 +2,12 @@
 
 import { Formik } from "formik";
 import { LoginFormInput } from "../types";
-import { ToastContainer, toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { LoginFormSchema } from "../schemas/LoginFormSchema";
 import { LoginFormInner } from "./LoginFormInner";
 import { useLoginMutation } from "../api/useLoginMutation";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export const LoginForm: React.FC = () => {
   const { mutateAsync: login } = useLoginMutation();
@@ -35,26 +35,40 @@ export const LoginForm: React.FC = () => {
       const errors = err.response?.data?.errors;
 
       if (errors && errors.length !== 0) {
-        toast.error(errors.join(" "), {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast(errors.join(" "), {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            color: "red",
+          },
+          className: "",
+          icon: "👏",
+          iconTheme: {
+            primary: "#000",
+            secondary: "#fff",
+          },
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
         });
       } else {
-        toast.error(err.message, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast(err.message, {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            color: "red",
+          },
+          className: "",
+          icon: "👏",
+          iconTheme: {
+            primary: "#000",
+            secondary: "#fff",
+          },
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
         });
       }
     }
@@ -76,17 +90,6 @@ export const LoginForm: React.FC = () => {
       >
         <LoginFormInner toRegisterPage={toRegisterPage} />
       </Formik>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 };
