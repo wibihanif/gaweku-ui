@@ -61,7 +61,7 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white border w-[432px] h-[460px] rounded-lg">
+    <div className="bg-white border w-screen h-auto pb-20 sm:pb-0 sm:w-[432px] sm:h-[460px] rounded-lg">
       <div className="text-[24px] font-normal mt-10 text-center">
         Sign in to <span className="font-semibold">GTask</span>
       </div>

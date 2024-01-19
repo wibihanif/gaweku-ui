@@ -41,7 +41,7 @@ export const ToDoListSection: React.FC = () => {
   return (
     <div className="bg-white h-screen">
       <ToDoListHeader />
-      <div className="grid grid-cols-2 gap-4 p-5">
+      <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-4 p-5">
         <div className="border rounded-md">
           <div className="text-sm font-semibold p-4">
             <div className="mb-4">

@@ -58,8 +58,8 @@ export const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white border w-[432px] h-[580px] rounded-lg">
-      <div className="text-[24px] font-normal mt-10 text-center ">
+    <div className="bg-white border w-screen h-auto pb-20 sm:w-[432px] sm:h-[580px] rounded-lg">
+      <div className="text-[24px] font-normal mt-10 text-center">
         Sign up to <span className="font-semibold">GTask</span>
       </div>
       <Formik<RegisterFormInput>

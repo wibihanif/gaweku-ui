@@ -14,12 +14,12 @@ export const LoginFormInner: React.FC<LoginFormInnerProps> = ({
 
   return (
     <div className="flex flex-col items-center justify-center gap-5 mt-8">
-      <div className="w-[384px]">
+      <div className="w-auto sm:w-[384px]">
         <label className="text-sm text-black">Email Address</label>
         <input
           type="email"
           id="email"
-          className="bg-white border block w-full p-2.5 rounded-md text-sm placeholder-gray-400 placeholder-shown:font-light"
+          className="bg-white border block w-72 sm:w-full rounded-md text-sm placeholder-gray-400 placeholder-shown:font-light"
           placeholder="Enter email address"
           required
           {...getFieldProps("email")}
@@ -30,12 +30,12 @@ export const LoginFormInner: React.FC<LoginFormInnerProps> = ({
           </p>
         )}
       </div>
-      <div className="w-[384px]">
+      <div className="w-auto sm:w-[384px]">
         <label className="text-sm text-black">Password</label>
         <input
           type="password"
           id="password"
-          className="bg-white border block w-full p-2.5 rounded-md text-sm placeholder-gray-400 placeholder-shown:font-light"
+          className="bg-white border block w-72 sm:w-full p-2.5 rounded-md text-sm placeholder-gray-400 placeholder-shown:font-light"
           placeholder="Enter password"
           required
           {...getFieldProps("password")}
@@ -48,7 +48,7 @@ export const LoginFormInner: React.FC<LoginFormInnerProps> = ({
       </div>
       <button
         type="button"
-        className="text-sm bg-[#B43030] w-[384px] h-[48px] rounded-lg text-white font-semibold mt-4"
+        className="text-sm bg-[#B43030] w-72 sm:w-[384px] h-[48px] rounded-lg text-white font-semibold mt-4"
         onClick={handleSubmit as unknown as MouseEventHandler<HTMLSpanElement>}
       >
         Login
