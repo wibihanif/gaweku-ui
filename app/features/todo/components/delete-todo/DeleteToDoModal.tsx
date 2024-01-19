@@ -1,4 +1,4 @@
-import { Button, Modal } from "flowbite-react";
+import { Modal } from "flowbite-react";
 import { ToDoData } from "../../types";
 import { useDeleteToDoMutation } from "../../api/useDeleteToDoMutation";
 import { toast } from "react-toastify";
@@ -29,7 +29,7 @@ export const DeleteToDoModal: React.FC<DeleteToDoModalProps> = ({
 
       await refetchToDoList();
 
-      toast.success("Task successfully deleted", {
+      return toast.success("Task successfully deleted", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,

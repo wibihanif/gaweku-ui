@@ -9,6 +9,7 @@ import { ToDoListSkeleton } from "./ToDoListSkeleton";
 import { DeleteToDoModal } from "./delete-todo/DeleteToDoModal";
 import { UpdateToDoModal } from "./update-todo/UpdateToDoModal";
 import { ToDoData } from "../types";
+import { ToastContainer } from "react-toastify";
 
 export const ToDoListSection: React.FC = () => {
   const [openDeleteToDoModal, setOpenDeleteToDoModal] = useState(false);

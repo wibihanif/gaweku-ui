@@ -36,10 +36,8 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} `}>
         <ProvidersReactQuery>
-          <Hydration>
-            {children}
-            <ToastContainer />
-          </Hydration>
+          <Hydration>{children}</Hydration>
+          <ToastContainer />
         </ProvidersReactQuery>
       </body>
     </html>

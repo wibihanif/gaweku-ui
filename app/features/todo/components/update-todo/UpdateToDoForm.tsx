@@ -39,7 +39,7 @@ export const UpdateToDoForm: React.FC<UpdateToDoFormProps> = ({
 
       await refetchToDoList();
 
-      toast.success("Task successfully updated", {
+      return toast.success("Task successfully updated", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,

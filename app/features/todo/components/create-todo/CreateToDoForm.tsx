@@ -32,14 +32,13 @@ export const CreateToDoForm: React.FC<CreateToDoFormProps> = ({
 
       await refetchToDoList();
 
-      toast.success("Task successfully created", {
+      return toast.success("Task successfully created", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
         theme: "light",
       });
     } catch (e) {

@@ -81,7 +81,6 @@ export const LoginForm: React.FC = () => {
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
-        closeOnClick={false}
         rtl={false}
         pauseOnFocusLoss
         draggable
